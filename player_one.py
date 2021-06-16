@@ -5,6 +5,6 @@ class Player_one:
         self.score = 0
         self.gestures = ["rock", "paper", "scissors", "lizard", "Spock"]
 
-    def choose_gesture(self):
+    def choosen_gesture(self):
         print("override this method")
         pass
