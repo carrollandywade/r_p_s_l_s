@@ -1,3 +1,4 @@
+import computer
 from player_one import Player_one
 from player_two import Player_two
 from computer import Computer
@@ -32,26 +33,35 @@ class Hands:
         print("paper disproves Spock")
         print("Spock vaporizes rock")
         print("rock crushes scissors")
+        print("best two out of three")
 
     def choose_one_or_two_player_mode(self):
         user_input = input("choose your opponent: computer or player two")
         if user_input == "player two":
-            self.player_two = Player_two()
+            pass
         elif user_input == "computer":
-            self.player_two = Computer()
+            pass
 
     def game_rounds(self):
-        self.show_player_one_options()
-        self.show_player_two_options()
-        pass
+        while self.player_one.score < 2 and self.player_two.score < 2:
+            self.player_one_turn()
+            self.player_two_turn()
+            self.display_score()
 
     def player_one_turn(self):
-        print("rock, paper, scissors, lizard, SPOCK!!!")
-        gesture_one_input = (input())
+        print("Choose your hand gesture:")
+        self.show_player_one_options()
+        chosen_input = input()
+        self.player_one.chosen_gesture.append(chosen_input)
+
 
     def player_two_turn(self):
-        print("rock, paper, scissors, lizard, SPOCK!!!")
-        gesture_two_input = (input())
+        print("Choose your hand gesture:")
+        self.show_player_two_options()
+        input()
+
+    def computer_turn(self):
+        pass
 
     def show_player_one_options(self):
         gesture_index = 0
@@ -65,10 +75,21 @@ class Hands:
             print(f"press {gesture_index} for {gesture}")
             gesture_index += 1
 
+    def show_computers_options(self):
+        pass
 
-    def test_score(self):
+    def test_score(self): # for testing scoring.
         self.player_one.score += 1
 
     def display_winner(self):
+        if self.player_one.score == self.player_two.score:
+            print("its a tie!")
+        if self.player_one.score == 2:
+            print("player one wins!")
+        if self.player_two.score == 2:
+            print("player two wins!")
+
+    def display_score(self):
         print("player one's score is "f"{self.player_one.score}")
         print("player two's score is "f"{self.player_two.score}")
+
