@@ -155,7 +155,6 @@ class Hands:
             self.computer.score += 1
             print("AI wins this round!")
 
-
     def print_chosen_gestures(self):
         print(self.player_one.chosen_gesture)
         print(self.player_two.chosen_gesture)
@@ -173,14 +172,13 @@ class Hands:
         self.show_player_two_options()
         self.player_two.chosen_gesture = int(input())
         if self.player_one.chosen_gesture >= 5:
-            self.player_one_turn()
+            self.player_two_turn()
 
     def computer_turn(self):
         print("Computers turn:")
         self.show_computers_options()
         self.computer.chosen_gesture = random.randint(0, 4)
         print(self.computer.chosen_gesture)
-
 
     def show_player_one_options(self):
         gesture_index = 0
