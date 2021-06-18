@@ -46,14 +46,14 @@ class Hands:
             self.choose_one_or_two_player_mode()
 
     def single_player_mode(self):# computer mode
-        while self.player_one.score < 2 and self.player_two.score < 2:
+        while self.player_one.score < 2 or self.player_two.score < 2:
             self.player_one_turn()
             self.computer_turn()
             self.the_referee()
             self.display_winner()
 
     def two_player_mode(self):# human mode
-        while self.player_one.score <= 2 and self.computer.score <= 2:
+        while self.player_one.score < 2 or self.computer.score < 2:
             self.player_one_turn()
             self.player_two_turn()
             self.the_referee()
@@ -62,38 +62,8 @@ class Hands:
     def the_referee(self):
         if self.player_one.chosen_gesture == self.player_two.chosen_gesture:
             print("It's a tie, no points awarded.")
-        if self.player_one.chosen_gesture == self.computer.chosen_gesture:
+        elif self.player_one.chosen_gesture == self.computer.chosen_gesture:
             print("Its a tie, no points awarded.")
-        elif self.player_one.chosen_gesture == 0 and self.player_two.chosen_gesture == 2:
-            self.player_one.score += 1
-            print("player one wins this round!")
-        elif self.player_one.chosen_gesture == 0 and self.player_two.chosen_gesture == 3:
-            self.player_one.score += 1
-            print("player one wins this round!")
-        elif self.player_one.chosen_gesture == 1 and self.player_two.chosen_gesture == 0:
-            self.player_one.score += 1
-            print("player one wins this round!")
-        elif self.player_one.chosen_gesture == 1 and self.player_two.chosen_gesture == 4:
-            self.player_one.score += 1
-            print("player one wins this round!")
-        elif self.player_one.chosen_gesture == 2 and self.player_two.chosen_gesture == 1:
-            self.player_one.score += 1
-            print("player one wins this round!")
-        elif self.player_one.chosen_gesture == 2 and self.player_two.chosen_gesture == 3:
-            self.player_one.score += 1
-            print("player one wins this round!")
-        elif self.player_one.chosen_gesture == 3 and self.player_two.chosen_gesture == 1:
-            self.player_one.score += 1
-            print("player one wins this round!")
-        elif self.player_one.chosen_gesture == 3 and self.player_two.chosen_gesture == 4:
-            self.player_one.score += 1
-            print("player one wins this round!")
-        elif self.player_one.chosen_gesture == 4 and self.player_two.chosen_gesture == 0:
-            self.player_one.score += 1
-            print("player one wins this round!")
-        elif self.player_one.chosen_gesture == 4 and self.player_two.chosen_gesture == 2:
-            self.player_one.score += 1
-            print("player one wins this round!")
         elif self.player_two.chosen_gesture == 0 and self.player_one.chosen_gesture == 2:
             self.player_two.score += 1
             print("player two wins this round!")
@@ -154,20 +124,33 @@ class Hands:
         elif self.computer.chosen_gesture == 4 and self.player_one.chosen_gesture == 2:
             self.computer.score += 1
             print("AI wins this round!")
+        else:
+            self.player_one.score += 1
+            print("Player one wins this round!")
 
     def player_one_turn(self):
         print("Player one's turn:")
         self.show_player_one_options()
-        self.player_one.chosen_gesture = int(input())
-        if self.player_one.chosen_gesture >= 5:
-            self.player_one_turn()
+        while True:
+            try:
+                self.player_one.chosen_gesture = int(input())
+            except ValueError:
+                    print("invalid")
+                    continue
+            else:
+                return self.player_one.chosen_gesture
 
     def player_two_turn(self):
         print("Player two's turn:")
         self.show_player_two_options()
-        self.player_two.chosen_gesture = int(input())
-        if self.player_one.chosen_gesture >= 5:
-            self.player_two_turn()
+        while True:
+            try:
+                self.player_two.chosen_gesture = int(input())
+            except ValueError:
+                    print("invalid")
+                    continue
+            else:
+                return self.player_two.chosen_gesture
 
     def computer_turn(self):
         print("Computers turn:")
