@@ -61,9 +61,9 @@ class Hands:
 
     def the_referee(self):
         if self.player_one.chosen_gesture == self.player_two.chosen_gesture:
-            print("p1 and p2 tie")
+            print("It's a tie, no points awarded.")
         if self.player_one.chosen_gesture == self.computer.chosen_gesture:
-            print("p1 and computer tie")
+            print("Its a tie, no points awarded.")
         elif self.player_one.chosen_gesture == 0 and self.player_two.chosen_gesture == 2:
             self.player_one.score += 1
             print("player one wins this round!")
@@ -155,11 +155,6 @@ class Hands:
             self.computer.score += 1
             print("AI wins this round!")
 
-    def print_chosen_gestures(self):
-        print(self.player_one.chosen_gesture)
-        print(self.player_two.chosen_gesture)
-        print(self.computer.chosen_gesture)
-
     def player_one_turn(self):
         print("Player one's turn:")
         self.show_player_one_options()
@@ -198,11 +193,6 @@ class Hands:
             print(f"press {gesture_index} for {gesture}")
             gesture_index += 1
 
-    def test_score(self): # for testing scoring.
-        self.player_one.score += 1
-        self.player_two.score += 1
-        self.computer.score += 1
-
     def display_winner(self):
         if self.computer.score > 1:
             print("AI wins best 2 out of 3!")
@@ -213,9 +203,3 @@ class Hands:
         elif self.player_two.score > 1:
             print("player two wins best 2 out of 3!")
             quit()
-
-    def display_score(self):
-        print("player one's score is "f"{self.player_one.score}")
-        print("player two's score is "f"{self.player_two.score}")
-        print("AI's score is "f"{self.computer.score}")
-
